@@ -1,0 +1,67 @@
+{{#if contacto.id}}
+    <h2>Editar Contacto</h2>
+{{else}}
+    <h2>Contactos</h2>
+    <pre>
+        <table class="table table-success table-striped">
+            <thead>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>E-mail</th>
+                <th>Teléfono</th>
+                <th colspan="2">Acciones</th>
+            </thead>
+            <tbody>            
+                {{#each contactos}}
+                    <tr>
+                        <td>{{nombre}} </td>
+                        <td>{{apellido}}</td>
+                        <td>{{email}}</td>
+                        <td>{{fono}}</td>
+                        <td><a href="/editar/{{id}}" class="btn btn-success">Editar</a></td>
+                        <td><a href="/borrar/{{id}}" class="btn btn-danger">Eliminar</a></td>
+                    </tr>
+                {{/each}}            
+            </tbody>
+        </table>
+    </pre>
+{{/if}}
+<div class="card bg-secondary text-light">
+    <form action="{{#unless contacto.id}}/agregar{{else}}/modificar/{{contacto.id}}{{/unless}}" method="post">
+        <div class="row">
+            <div class="col-5 mx-auto mt-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre" value="{{contacto.nombre}}" class="form-control">
+            </div>
+            <div class="col-5 mx-auto mt-3">
+                <label for="apellido" class="form-label">Apellidos</label>
+                <input type="text" name="apellido" id="apellido" placeholder="Apellidos" value="{{contacto.apellido}}" class="form-control">
+            </div>        
+        </div>
+        <div class="row">
+            <div class="col-7 mx-auto mt-2">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" name="email" id="email" placeholder="Email" value="{{contacto.email}}" class="form-control">
+            </div>
+            <div class="col-3 mx-auto mt-2">
+                <label for="fono" class="form-label">Teléfono</label>
+                <input type="text" name="fono" id="fono" placeholder="Teléfono" value="{{contacto.fono}}" class="form-control">
+            </div>
+        </div>
+        <div class="row my-3 mx-5">
+            {{#if contacto.id}}
+                <div class="col-4 mx-auto">
+                    <button type="submit" class="btn btn-primary btn-block">Modificar</button>
+                </div>    
+                <div class="col-4 mx-auto">
+                    <a href="/" class="btn btn-success btn-block">Cancelar</a>
+                </div>
+            {{else}}
+                <div class="col-8 mx auto">
+                    <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+                </div>
+            {{/if}}
+        </div>        
+        
+    </form>
+</div>
